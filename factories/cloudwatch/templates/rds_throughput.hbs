@@ -1,0 +1,28 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.rds.network_receive_throughput{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    },
+    {
+      "q": "avg:aws.rds.network_transmit_throughput{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

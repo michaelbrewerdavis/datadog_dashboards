@@ -1,0 +1,17 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.rds.cpuutilization{dbinstanceidentifier:{{~dbinstanceidentifier~}}}",
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": []
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {}
+}

@@ -1,0 +1,25 @@
+{
+  "nodeType": "host",
+  "requests": [
+    {
+      "q": "avg:system.mem.used{{{querify queryObject}}} by {host}",
+      "type": "fill"
+    },
+    {
+      "q": "avg:system.mem.total{{{querify queryObject}}} by {host}",
+      "type": "size"
+    }
+  ],
+  {{#if group}}
+  "group": {{{JSONStringify group}}},
+  {{/if}}
+  "viz": "hostmap",
+  "style": {
+    "palette": "green_to_orange",
+    "paletteFlip": false,
+    "fillMin": null,
+    "fillMax": null
+  },
+  "noGroupHosts": true,
+  "noMetricHosts": false
+}

@@ -1,0 +1,80 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.lambda.duration.p99.9{{{querify queryObject}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.duration.p99.9{{{querify queryObject}}}": {
+          "alias": "p99.9"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    },
+    {
+      "q": "avg:aws.lambda.duration.p95{{{querify queryObject}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.duration.p95{{{querify queryObject}}}": {
+          "alias": "p95"
+        }
+      }
+    },
+    {
+      "q": "avg:aws.lambda.duration.p80{{{querify queryObject}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.duration.p80{{{querify queryObject}}}": {
+          "alias": "p80"
+        }
+      }
+    },
+    {
+      "q": "avg:aws.lambda.duration{{{querify queryObject}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.duration{{{querify queryObject}}}": {
+          "alias": "duration"
+        }
+      }
+    },
+    {
+      "q": "avg:aws.lambda.duration.maximum{{{querify queryObject}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.duration.maximum{{{querify queryObject}}}": {
+          "alias": "Max"
+        }
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

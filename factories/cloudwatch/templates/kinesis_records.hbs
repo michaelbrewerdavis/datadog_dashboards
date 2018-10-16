@@ -1,0 +1,38 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.kinesis.get_records_records.sum{region:us-east-1,streamname:{{~toLowerCase name~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.kinesis.get_records_records.sum{region:us-east-1,streamname:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "Get Sum"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    },
+    {
+      "q": "avg:aws.kinesis.put_records_records.sum{region:us-east-1,streamname:{{~toLowerCase name~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.kinesis.put_records_records.sum{region:us-east-1,streamname:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "Put Sum"
+        }
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

@@ -1,0 +1,46 @@
+{{!--
+
+Variables:
+
+readWrite
+queryObject
+
+ --}}
+{
+  "viz": "timeseries",
+  "requests": [
+    {
+      "q": "max:aws.dynamodb.consumed_{{readWrite}}_capacity_units{{{querify queryObject}}}",
+      "metadata": {
+        "max:aws.dynamodb.consumed_{{readWrite}}_capacity_units{{{querify queryObject}}}": {
+          "alias": "Consumed {{readWrite}} CU"
+        }
+      },
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "area",
+        "width": "normal"
+      }
+    },
+    {
+      "q": "max:aws.dynamodb.provisioned_{{readWrite}}_capacity_units{{{querify queryObject}}}",
+      "metadata": {
+        "max:aws.dynamodb.provisioned_{{readWrite}}_capacity_units{{{querify queryObject}}}": {
+          "alias": "Provisioned {{readWrite}} CU"
+        }
+      },
+      "type": "line",
+      "style": {
+        "palette": "orange",
+        "type": "solid",
+        "width": "thin"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

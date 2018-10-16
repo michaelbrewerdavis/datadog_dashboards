@@ -1,0 +1,19 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.sqs.number_of_messages_deleted{{{querify queryObject}}}.as_count()",
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "sum"
+    }
+  ],
+  "viz": "query_value",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

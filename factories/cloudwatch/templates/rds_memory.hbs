@@ -1,0 +1,19 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~dbinstanceidentifier~}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

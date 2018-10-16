@@ -1,0 +1,28 @@
+{
+  "requests": [
+    {
+      "q": "sum:aws.elb.httpcode_target_2xx{loadbalancer:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_4xx{loadbalancer:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_5xx{loadbalancer:{{~toLowerCase name~}}}.as_count()",
+      "type": "area",
+      "style": {
+        "palette": "warm",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "sum:aws.elb.httpcode_target_2xx{loadbalancer:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "2xx"
+        },
+        "sum:aws.elb.httpcode_target_4xx{loadbalancer:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "4xx"
+        },
+        "sum:aws.elb.httpcode_target_5xx{loadbalancer:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "5xx"
+        }
+      },
+      "conditional_formats": []
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {}
+}

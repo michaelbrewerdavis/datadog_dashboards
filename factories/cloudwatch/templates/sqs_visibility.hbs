@@ -1,0 +1,38 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.sqs.approximate_number_of_messages_visible{{{querify queryObject}}}",
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.sqs.approximate_number_of_messages_visible{{{querify queryObject}}}": {
+          "alias": "Visible (Needs Processing)"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    },
+    {
+      "q": "avg:aws.sqs.approximate_number_of_messages_not_visible{{{querify queryObject}}}",
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.sqs.approximate_number_of_messages_not_visible{{{querify queryObject}}}": {
+          "alias": "Invisible (Processing)"
+        }
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

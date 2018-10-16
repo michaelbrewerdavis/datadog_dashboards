@@ -1,0 +1,36 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.elasticache.cache_hits{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.elasticache.cache_hits{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "Cache Hits"
+        }
+      },
+      "conditional_formats": []
+    },
+    {
+      "q": "avg:aws.elasticache.cache_misses{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.elasticache.cache_misses{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "Cache Misses"
+        }
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {}
+}

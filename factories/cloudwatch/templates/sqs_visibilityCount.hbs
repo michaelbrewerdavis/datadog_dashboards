@@ -1,0 +1,25 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.sqs.approximate_number_of_messages_visible{{{querify queryObject}}}",
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [
+        {
+          "comparator": ">",
+          "value": "5",
+          "palette": "red_on_white"
+        }
+      ],
+      "aggregator": "last"
+    }
+  ],
+  "viz": "query_value",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

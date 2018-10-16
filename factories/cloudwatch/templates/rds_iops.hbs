@@ -1,0 +1,28 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.rds.read_iops{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_rate()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    },
+    {
+      "q": "avg:aws.rds.write_iops{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_rate()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

@@ -1,0 +1,50 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.lambda.invocations{{{querify queryObject}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.invocations{{{querify queryObject}}}.as_count()": {
+          "alias": "Invocations"
+        }
+      },
+      "conditional_formats": []
+    },
+    {
+      "q": "avg:aws.lambda.throttles{{{querify queryObject}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.throttles{{{querify queryObject}}}.as_count()": {
+          "alias": "Throttles"
+        }
+      }
+    },
+    {
+      "q": "avg:aws.lambda.errors{{{querify queryObject}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.lambda.errors{{{querify queryObject}}}.as_count()": {
+          "alias": "Errors"
+        }
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {}
+}

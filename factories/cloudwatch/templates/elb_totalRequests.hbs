@@ -1,0 +1,19 @@
+{
+  "viz": "query_value",
+  "requests": [
+    {
+      "q": "sum:aws.elb.request_count{loadbalancer:{{~toLowerCase name~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "sum"
+    }
+  ],
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

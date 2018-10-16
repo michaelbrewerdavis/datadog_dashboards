@@ -1,0 +1,29 @@
+{
+  "requests": [
+  {{#each asgs}}
+    {
+      "q": "max:aws.autoscaling.group_in_service_instances{autoscaling_group:{{~toLowerCase name~}}}",
+      {{#if title}}
+      "metadata": {
+        "max:aws.autoscaling.group_in_service_instances{autoscaling_group:{{~toLowerCase name~}}}": {
+          "alias": "{{title}}"
+        }
+      },
+      {{/if}}
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+    {{#unless @last}},{{/unless}}
+  {{/each}}
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

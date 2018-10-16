@@ -1,0 +1,24 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.elasticache.curr_items{cacheclusterid:{{~toLowerCase name~}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.elasticache.curr_items{cacheclusterid:{{~toLowerCase name~}}}": {
+          "alias": "Current Items"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

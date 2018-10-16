@@ -1,0 +1,24 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.elasticache.freeable_memory{cacheclusterid:{{~toLowerCase name~}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.elasticache.freeable_memory{cacheclusterid:{{~toLowerCase name~}}}": {
+          "alias": "Freeable Memory"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

@@ -1,0 +1,38 @@
+{
+  "requests": [
+    {
+      "q": "max:aws.elb.healthy_host_count{loadbalancer:{{~toLowerCase name~}}}",
+      "type": "area",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "max:aws.elb.healthy_host_count{loadbalancer:{{~toLowerCase name~}}}": {
+          "alias": "Healthy"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "sum"
+    },
+    {
+      "q": "max:aws.elb.un_healthy_host_count{loadbalancer:{{~toLowerCase name~}}}",
+      "type": "area",
+      "style": {
+        "palette": "warm",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "max:aws.elb.un_healthy_host_count{loadbalancer:{{~toLowerCase name~}}}": {
+          "alias": "Unhealthy"
+        }
+      }
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

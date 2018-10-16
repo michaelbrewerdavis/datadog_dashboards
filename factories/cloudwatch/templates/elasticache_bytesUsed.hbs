@@ -1,0 +1,24 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.elasticache.bytes_used_for_cache{cacheclusterid:{{~toLowerCase name~}}}",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.elasticache.bytes_used_for_cache{cacheclusterid:{{~toLowerCase name~}}}": {
+          "alias": "Bytes used for Cache"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}
