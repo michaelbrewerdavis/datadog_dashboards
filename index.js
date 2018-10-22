@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 require("dotenv").config();
-TimeboardService = require("./services/timeboards");
 
+const { version } = require('./package.json');
+
+TimeboardService = require("./services/timeboards");
 HostGraphFactory = require("./factories/host/host");
 CloudwatchAsgGraphFactory = require("./factories/cloudwatch/asg");
 CloudwatchDynamoPanelFactory = require("./factories/cloudwatch/dynamodb");
@@ -27,7 +29,7 @@ const ROOT_PATH = process.cwd();
 const program = require("commander");
 
 program
-  .version("0.1.0")
+  .version(version)
   .usage("[options] <file ...>")
   .option("-d, --dashboards [value]", "The dasboards config file")
   .parse(process.argv);
@@ -48,7 +50,24 @@ const dashboard =
   prompt("Dashboards path: ");
 
 console.log(`Dashboard: ${dashboard}`);
-const dashboardsConfig = require(path.join(ROOT_PATH, dashboard));
+
+let dashboardsConfig;
+
+try {
+  dashboardsConfig = require(path.join(ROOT_PATH, dashboard));
+} catch (err) {
+  exitProgram("Dashboard file not found!");
+}
+
+if (!DATADOG_API_APP_KEY || !DATADOG_API_API_KEY) {
+  exitProgram("Datadog keys DATADOG_API_APP_KEY && DATADOG_API_API_KEY not found");
+}
+
+function exitProgram(text) {
+  console.log(chalk.red(text))
+  program.outputHelp();
+  process.exit(1);
+}
 
 function getDashboardJsonString(dashboardConfig, prettyPrint = false) {
   const generated = generateEnvironmentDashboard(dashboardConfig);
