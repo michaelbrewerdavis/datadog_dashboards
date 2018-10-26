@@ -1,0 +1,23 @@
+{
+  "requests": [
+    {
+      "q": "avg:aws.elasticache.evictions{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
+      "type": "line",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "avg:aws.elasticache.evictions{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
+          "alias": "Evictions"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "status": "done"
+}

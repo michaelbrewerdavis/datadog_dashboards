@@ -42,6 +42,26 @@ class CloudwatchElasticacheGraphFactory {
       name
     });
   }
+
+  /**
+   * Creates an Elasticache evictions timeseries graph
+   * @param {string} name
+   */
+  elasticache_evictions(name) {
+    return Templates.jsonFromTemplate("templates/elasticache_evictions.hbs", {
+      name
+    });
+  }
+
+  /**
+   * Creates an Elasticache Redis commands timeseries graph
+   * @param {string} name
+   */
+  elasticache_redis_commands(name) {
+    return Templates.jsonFromTemplate("templates/elasticache_redis_commands.hbs", {
+      name
+    });
+  }
 }
 
 module.exports = CloudwatchElasticacheGraphFactory;

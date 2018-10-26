@@ -1,0 +1,44 @@
+{
+  "requests": [
+    {
+      "q": "top(avg:aws.elasticache.get_type_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.set_type_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.key_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.set_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.hash_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.list_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.string_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc'), top(avg:aws.elasticache.sorted_set_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')",
+      "type": "bars",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "metadata": {
+        "top(avg:aws.elasticache.get_type_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "Get"
+        },
+        "top(avg:aws.elasticache.set_type_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "Set"
+        },
+        "top(avg:aws.elasticache.key_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "Key-based"
+        },
+        "top(avg:aws.elasticache.set_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "Set-based"
+        },
+        "top(avg:aws.elasticache.hash_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "Hash-based"
+        },
+        "top(avg:aws.elasticache.list_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "List-based"
+        },
+        "top(avg:aws.elasticache.string_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "String-based"
+        },
+        "top(avg:aws.elasticache.sorted_set_based_cmds{cacheclusterid:{{~toLowerCase name~}}}.as_count(), 10, 'mean', 'desc')": {
+          "alias": "Sorted-set based"
+        }
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+  ],
+  "viz": "timeseries",
+  "autoscale": true,
+  "status": "done"
+}

@@ -294,6 +294,16 @@ function generateCachesGraphs(caches, graphs = []) {
       title: `${caches[key].title}: Freeable Memory`,
       definition: factory.elasticache_freeableMemory(caches[key].name)
     });
+    graphs.push({
+      title: `${caches[key].title}: Evictions`,
+      definition: factory.elasticache_evictions(caches[key].name)
+    });
+    if (caches[key].type === 'redis') {
+      graphs.push({
+        title: `${caches[key].title}: Commands`,
+        definition: factory.elasticache_redis_commands(caches[key].name)
+      });
+    }
   });
   return graphs;
 }
