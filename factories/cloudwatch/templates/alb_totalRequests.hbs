@@ -2,7 +2,7 @@
   "viz": "query_value",
   "requests": [
     {
-      "q": "sum:aws.elb.request_count{loadbalancername:{{~toLowerCase name~}}}.as_count()",
+      "q": "sum:aws.elb.request_count{loadbalancer:{{~toLowerCase name~}}}.as_count()",
       "type": "line",
       "style": {
         "palette": "dog_classic",

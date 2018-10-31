@@ -1,7 +1,7 @@
 {
   "requests": [
     {
-      "q": "max:aws.elb.healthy_host_count{loadbalancername:{{~toLowerCase name~}}}",
+      "q": "max:aws.elb.healthy_host_count{loadbalancer:{{~toLowerCase name~}}}",
       "type": "area",
       "style": {
         "palette": "dog_classic",
@@ -9,7 +9,7 @@
         "width": "normal"
       },
       "metadata": {
-        "max:aws.elb.healthy_host_count{loadbalancername:{{~toLowerCase name~}}}": {
+        "max:aws.elb.healthy_host_count{loadbalancer:{{~toLowerCase name~}}}": {
           "alias": "Healthy"
         }
       },
@@ -17,7 +17,7 @@
       "aggregator": "sum"
     },
     {
-      "q": "max:aws.elb.un_healthy_host_count{loadbalancername:{{~toLowerCase name~}}}",
+      "q": "max:aws.elb.un_healthy_host_count{loadbalancer:{{~toLowerCase name~}}}",
       "type": "area",
       "style": {
         "palette": "warm",
@@ -25,7 +25,7 @@
         "width": "normal"
       },
       "metadata": {
-        "max:aws.elb.un_healthy_host_count{loadbalancername:{{~toLowerCase name~}}}": {
+        "max:aws.elb.un_healthy_host_count{loadbalancer:{{~toLowerCase name~}}}": {
           "alias": "Unhealthy"
         }
       }

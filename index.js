@@ -6,6 +6,7 @@ const { version } = require('./package.json');
 
 TimeboardService = require("./services/timeboards");
 HostGraphFactory = require("./factories/host/host");
+CloudwatchAlbGraphFactory = require("./factories/cloudwatch/alb");
 CloudwatchAsgGraphFactory = require("./factories/cloudwatch/asg");
 CloudwatchDynamoPanelFactory = require("./factories/cloudwatch/dynamodb");
 CloudwatchEc2GraphFactory = require("./factories/cloudwatch/ec2");
@@ -131,26 +132,26 @@ createDashboards(dashboardsConfig);
 function generateAlbGraphs(alb, graphs = []) {
   if (!alb) return;
 
-  const factoryElb = new CloudwatchElbGraphFactory();
+  const factoryAlb = new CloudwatchAlbGraphFactory();
 
   graphs.push({
     title: "ALB Hits",
-    definition: factoryElb.elb_hits(alb)
+    definition: factoryAlb.alb_hits(alb)
   });
 
   graphs.push({
     title: "ALB Request Count",
-    definition: factoryElb.elb_totalRequests(alb)
+    definition: factoryAlb.alb_totalRequests(alb)
   });
 
   graphs.push({
     title: "ALB Host Health (per A-Z)",
-    definition: factoryElb.elb_health(alb)
+    definition: factoryAlb.alb_health(alb)
   });
 
   graphs.push({
     title: "ALB Latency",
-    definition: factoryElb.elb_latency(alb)
+    definition: factoryAlb.alb_latency(alb)
   });
 
   return graphs;
