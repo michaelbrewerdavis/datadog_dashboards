@@ -1,0 +1,46 @@
+{
+  "requests": [
+  {{#each queries}}
+    {
+      {{#if qs}}
+        "q": "{{#each qs}}{{q}}{{#unless @last}},{{/unless}}{{/each}}",
+        "metadata": {
+          {{#each qs}}
+            {{#if alias}}
+              "{{q}}": {
+                "alias": "{{alias}}"
+              }{{#unless @last}},{{/unless}}
+            {{/if}}
+          {{/each}}
+        },
+      {{else}}
+        "q": "{{q}}",
+        {{#if alias}}
+        "metadata": {
+          "{{q}}": {
+            "alias": "{{alias}}"
+          }
+        },
+        {{/if}}
+      {{/if}}
+      {{#if type}}
+      "type": "{{type}}",
+      {{else}}
+      "type": "line",
+      {{/if}}
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "conditional_formats": [],
+      "aggregator": "avg"
+    }
+    {{#unless @last}},{{/unless}}
+  {{/each}}
+  ],
+  "viz": "{{viz}}",
+  "autoscale": true,
+  "xaxis": {},
+  "status": "done"
+}

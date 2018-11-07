@@ -2,22 +2,10 @@
 
 exports.dashboardsByEnvironment = [{
   title: 'Dashboard Title (environment)',
-  env: 'environment',
   project: 'project name',
   environment_host: 'host environment',
   region: 'put AWS region here',
   rds_id: 'AWS rds id',
-  graphite: {
-    request_timing: {
-      title: 'Top 5 Slowest Requests ($request_interval moving average)',
-      target: `aliasByNode(movingAverage(sortByMaxima(highestAverage(stats.timers.my_app.production.request.*.*.total.mean, 5)), '$request_interval'), 5, 6)`
-    },
-    request_top: {
-      title: 'Top 5 Request Counts (per $request_interval)',
-      target: `aliasByNode(sortByMaxima(summarize(highestMax(exclude(stats.timers.my_app.production.request.*.*.total.count, 'health_check'), 5), '$request_interval', 'sum')), 5, 6)`
-    }
-  },
-  cloudwatch: 'CloudWatch name',
   alb: 'app/app-name-A7ceNNeF5q/beefdadbeefdadda',
   asgs: {
     web: {
@@ -78,13 +66,37 @@ exports.dashboardsByEnvironment = [{
       title: 'another queue',
       name: 'aws name'
     }
-  },
-  tags: [
-   'tags to group dashboards by'
-  ],
-  links: {
-    'Kibana': 'https://yourlinktokibana.com',
-    'Sentry': 'https://yourlinktosetry.com'
+  }
+}, {
+  title: `Requests by Region`,
+  template_variables: [{
+    name: "region",
+    prefix: "region",
+    default: "region:*"
+  }],
+  custom: {
+    custom_graph_1: {
+      title: 'API Conroller 1 requests',
+      viz: 'timeseries',
+      queries: [{
+        type: 'bars',
+        qs: [
+          { q:'sum:request.controller1.show.total.count{$region}.as_count()', alias: 'controller1_show'},
+          { q:'sum:request.controller1.update.total.count{$region}.as_count()', alias: 'controller1_update'}
+        ]
+      }]
+    },
+    custom_graph_1: {
+      title: 'API Conroller 2 requests',
+      viz: 'timeseries',
+      queries: [{
+        type: 'bars',
+        qs: [
+          { q:'sum:request.controller2.show.total.count{$region}.as_count()', alias: 'controller2_show'},
+          { q:'sum:request.controller2.update.total.count{$region}.as_count()', alias: 'controller2_update'}
+        ]
+      }]
+    }
   }
 }]
 

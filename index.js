@@ -17,6 +17,7 @@ CloudwatchLambdaGraphFactory = require("./factories/cloudwatch/lambda");
 CloudwatchRdsGraphFactory = require("./factories/cloudwatch/rds");
 CloudwatchSqsGraphFactory = require("./factories/cloudwatch/sqs");
 CloudwatchS3GraphFactory = require("./factories/cloudwatch/s3");
+CustomGraphFactory = require("./factories/custom");
 
 const chalk = require("chalk");
 const CLI = require("clui");
@@ -33,6 +34,7 @@ program
   .version(version)
   .usage("[options] <file ...>")
   .option("-d, --dashboards [value]", "The dasboards config file")
+  .option("-p, --preview", "Preview the JSON, don't create the dashboard")
   .parse(process.argv);
 
 console.log(
@@ -57,7 +59,7 @@ let dashboardsConfig;
 try {
   dashboardsConfig = require(path.join(ROOT_PATH, dashboard));
 } catch (err) {
-  exitProgram("Dashboard file not found!");
+  exitProgram(`Dashboard file error: ${err}`);
 }
 
 if (!DATADOG_API_APP_KEY || !DATADOG_API_API_KEY) {
@@ -127,7 +129,37 @@ function createDashboards(dashboardsConfig) {
   });
 }
 
-createDashboards(dashboardsConfig);
+/**
+ * Previews the dashboard JSON and outputs it to stdout
+ * @param {*} dashboardsConfig
+ */
+function previewDashboards(dashboardsConfig) {
+  dashboardsConfig.dashboardsByEnvironment.map(dashboardConfig => {
+    console.log(chalk.green.bold(`Dashboard - ${dashboardConfig.title}`));
+    const jsonString = getDashboardJsonString(dashboardConfig, true);
+    console.log(jsonString)
+  })
+}
+
+if (program.preview) {
+  previewDashboards(dashboardsConfig);
+} else {
+  createDashboards(dashboardsConfig);
+}
+
+function generateCustomGraphs(graphDefinitions, graphs = []) {
+  const factory = new CustomGraphFactory();
+
+  if (graphDefinitions) {
+    Object.keys(graphDefinitions).forEach(function(key) {
+      graphs.push({
+        title: `${graphDefinitions[key].title}`,
+        definition: factory.timeseries(graphDefinitions[key])
+      });
+    })
+  }
+}
+
 
 function generateAlbGraphs(alb, graphs = []) {
   if (!alb) return;
@@ -408,8 +440,14 @@ function generateEnvironmentDashboard(vars) {
   var dashboard = {
     title: vars.title,
     description: vars.description || "A great dashboard!",
+    template_variables: vars.template_variables,
     graphs: []
   };
+
+  // Custom, custom graphs
+  if (vars.custom) {
+    generateCustomGraphs(vars.custom, dashboard.graphs);
+  }
 
   // ALB
   if (vars.alb) {
