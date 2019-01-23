@@ -1,46 +1,44 @@
-{{!--
-
-Variables:
-
-readWrite
-queryObject
-
- --}}
 {
-  "viz": "timeseries",
-  "requests": [
-    {
-      "q": "max:aws.dynamodb.consumed_{{readWrite}}_capacity_units{{{querify queryObject}}}",
-      "metadata": {
-        "max:aws.dynamodb.consumed_{{readWrite}}_capacity_units{{{querify queryObject}}}": {
-          "alias": "Consumed {{readWrite}} CU"
-        }
-      },
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
+  "type": "timeseries",
+  "title": true,
+  "title_text": "{{mode}}",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "max:aws.dynamodb.consumed_{{toLowerCase mode}}_capacity_units{{{querify query}}}",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
         "type": "area",
-        "width": "normal"
-      }
-    },
-    {
-      "q": "max:aws.dynamodb.provisioned_{{readWrite}}_capacity_units{{{querify queryObject}}}",
-      "metadata": {
-        "max:aws.dynamodb.provisioned_{{readWrite}}_capacity_units{{{querify queryObject}}}": {
-          "alias": "Provisioned {{readWrite}} CU"
+        "metadata": {
+          "max:aws.dynamodb.consumed_{{toLowerCase mode}}_capacity_units{{{querify query}}}": {
+            "alias": "Consumed"
+          }
         }
       },
-      "type": "line",
-      "style": {
-        "palette": "orange",
-        "type": "solid",
-        "width": "thin"
-      },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+      {
+        "q": "max:aws.dynamodb.provisioned_{{toLowerCase mode}}_capacity_units{{{querify query}}}",
+        "style": {
+          "width": "thin",
+          "palette": "orange",
+          "type": "solid"
+        },
+        "type": "line",
+        "metadata": {
+          "max:aws.dynamodb.provisioned_{{toLowerCase mode}}_capacity_units{{{querify query}}}": {
+            "alias": "Provisioned"
+          }
+        }
+      }
+    ],
+    "autoscale": true
+  }
 }

@@ -1,28 +1,45 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.rds.read_iops{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_rate()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "IOPS",
+  "width": 29,
+  "height": 13,
+  "x": 59,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "conditional_formats": [],
+        "q": "avg:aws.rds.read_iops{dbinstanceidentifier:{{~name~}}}.as_rate()",
+        "type": "line",
+        "metadata": {
+          "avg:aws.rds.read_iops{dbinstanceidentifier:{{~name~}}}.as_rate()": {
+            "alias": "Read"
+          }
+        }
       },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    },
-    {
-      "q": "avg:aws.rds.write_iops{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_rate()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
+      {
+        "q": "avg:aws.rds.write_iops{dbinstanceidentifier:{{~name~}}}.as_rate()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "type": "line",
+        "metadata": {
+          "avg:aws.rds.write_iops{dbinstanceidentifier:{{~name~}}}.as_rate()": {
+            "alias": "Write"
+          }
+        }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  }
 }

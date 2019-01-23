@@ -1,0 +1,45 @@
+{
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Throttled",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "max:aws.dynamodb.read_throttle_events{{{querify query}}}.as_count()",
+        "style": {
+          "width": "thin",
+          "palette": "warm",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "bars",
+        "metadata": {
+          "max:aws.dynamodb.read_throttle_events{{{querify query}}}.as_count()": {
+            "alias": "Read"
+          }
+        }
+      },
+      {
+        "q": "max:aws.dynamodb.write_throttle_events{{{querify query}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "warm",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "bars",
+        "metadata": {
+          "max:aws.dynamodb.write_throttle_events{{{querify query}}}.as_count()": {
+            "alias": "Write"
+          }
+        }
+      }
+    ],
+    "autoscale": true
+  }
+}

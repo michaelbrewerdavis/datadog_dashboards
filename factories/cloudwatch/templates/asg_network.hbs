@@ -1,7 +1,7 @@
 {
   "type": "timeseries",
   "title": true,
-  "title_text": "Total Instances",
+  "title_text": "Network {{type}}",
   "width": {{width}},
   "height": {{height}},
   "x": {{x}},
@@ -11,10 +11,10 @@
     "requests": [
       {{#each asgs}}
       {
-        "q": "max:aws.autoscaling.group_in_service_instances{autoscaling_group:{{~toLowerCase name~}}}",
+        "q": "max:aws.ec2.network_{{toLowerCase ../type}}{autoscaling_group:{{~toLowerCase name~}}}",
         {{#if title}}
         "metadata": {
-          "max:aws.autoscaling.group_in_service_instances{autoscaling_group:{{~toLowerCase name~}}}": {
+          "max:aws.ec2.network_{{toLowerCase ../type}}{autoscaling_group:{{~toLowerCase name~}}}": {
             "alias": "{{title}}"
           }
         },

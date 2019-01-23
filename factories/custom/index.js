@@ -1,13 +1,20 @@
-const Templates = require("../../lib/templates");
+const chalk = require("chalk");
 
-class CustomGraphFactory {
+class CustomWidgetFactory {
   /**
-   * Creates a custom timeseries graph
-   * @param {object} options
+   * Returns rendered JSON template from given params.
+   *
+   * @param {string} widget Custom widget configuration object.
+   * @param {string} state
    */
-  timeseries(options) {
-    return Templates.jsonFromTemplate("templates/timeseries.hbs", options);
+  render(widget, state) {
+    if (!'y' in widget) {
+      console.log(chalk.red('Custom widgets should explicitly define "y" position, defaulting to 0.'));
+    }
+    widget['y'] = state.position + (widget['y'] || 0);
+
+    return widget;
   }
 }
 
-module.exports = CustomGraphFactory;
+module.exports = CustomWidgetFactory;

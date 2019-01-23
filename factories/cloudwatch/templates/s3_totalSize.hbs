@@ -1,7 +1,7 @@
 {
   "type": "query_value",
   "title": true,
-  "title_text": "Total Deleted",
+  "title_text": "Total Size",
   "width": 21,
   "height": 7,
   "x": 0,
@@ -10,12 +10,14 @@
     "viz": "query_value",
     "requests": [
       {
-        "q": "avg:aws.sqs.number_of_messages_deleted{{{querify query}}}.as_count()",
-        "aggregator": "sum"
+        "q": "avg:aws.s3.bucket_size_bytes{{{querify query}}}",
+        "aggregator": "last"
       }
     ],
     "autoscale": true,
-    "precision": 2,
-    "custom_unit": "m"
+    "precision": 2
+  },
+  "time": {
+    "live_span": "1d"
   }
 }

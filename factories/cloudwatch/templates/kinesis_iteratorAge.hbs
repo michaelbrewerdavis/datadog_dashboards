@@ -1,38 +1,46 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.kinesis.get_records_iterator_age{streamname:{{~toLowerCase name~}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.kinesis.get_records_iterator_age{streamname:{{~toLowerCase name~}}}": {
-          "alias": "Iterator Age"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Iterator Age",
+  "width": 37,
+  "height": 18,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.kinesis.get_records_iterator_age{streamname:{{~toLowerCase name~}}}",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.kinesis.get_records_iterator_age{streamname:{{~toLowerCase name~}}}": {
+            "alias": "Iterator Age"
+          }
         }
       },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    },
-    {
-      "q": "avg:aws.kinesis.get_records_iterator_age.maximum{streamname:{{~toLowerCase name~}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.kinesis.get_records_iterator_age.maximum{streamname:{{~toLowerCase name~}}}": {
-          "alias": "Maximum"
+      {
+        "q": "avg:aws.kinesis.get_records_iterator_age.maximum{streamname:{{~toLowerCase name~}}}",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.kinesis.get_records_iterator_age.maximum{streamname:{{~toLowerCase name~}}}": {
+            "alias": "Maximum"
+          }
         }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  },
+  "legend": true
 }

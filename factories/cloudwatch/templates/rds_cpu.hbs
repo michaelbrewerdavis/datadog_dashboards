@@ -1,17 +1,30 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.rds.cpuutilization{dbinstanceidentifier:{{~dbinstanceidentifier~}}}",
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "conditional_formats": []
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {}
+  "type": "timeseries",
+  "title": true,
+  "title_text": "CPU Usage",
+  "width": 39,
+  "height": 13,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.rds.cpuutilization{dbinstanceidentifier:{{~name~}}}",
+        "type": "area",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "avg",
+        "metadata": {
+          "avg:aws.rds.cpuutilization{dbinstanceidentifier:{{~name~}}}": {
+            "alias": "CPU Usage"
+          }
+        }
+      }
+    ],
+    "autoscale": true
+  }
 }

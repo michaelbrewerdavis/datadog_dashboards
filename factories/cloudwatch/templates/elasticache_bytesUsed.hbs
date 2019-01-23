@@ -1,24 +1,30 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.elasticache.bytes_used_for_cache{cacheclusterid:{{~toLowerCase name~}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.elasticache.bytes_used_for_cache{cacheclusterid:{{~toLowerCase name~}}}": {
-          "alias": "Bytes used for Cache"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Bytes Used",
+  "width": 39,
+  "height": 13,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.elasticache.bytes_used_for_cache{cacheclusterid:{{~toLowerCase name~}}}",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "area",
+        "metadata": {
+          "avg:aws.elasticache.bytes_used_for_cache{cacheclusterid:{{~toLowerCase name~}}}": {
+            "alias": "Bytes Used"
+          }
         }
-      },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+      }
+    ],
+    "autoscale": true
+  }
 }

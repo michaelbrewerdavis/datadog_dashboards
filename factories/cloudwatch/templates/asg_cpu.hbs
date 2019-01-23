@@ -1,7 +1,7 @@
 {
   "type": "timeseries",
   "title": true,
-  "title_text": "Total Instances",
+  "title_text": "CPU Utilization",
   "width": {{width}},
   "height": {{height}},
   "x": {{x}},
@@ -11,10 +11,10 @@
     "requests": [
       {{#each asgs}}
       {
-        "q": "max:aws.autoscaling.group_in_service_instances{autoscaling_group:{{~toLowerCase name~}}}",
+        "q": "avg:aws.ec2.cpuutilization{autoscaling_group:{{~toLowerCase name~}}}",
         {{#if title}}
         "metadata": {
-          "max:aws.autoscaling.group_in_service_instances{autoscaling_group:{{~toLowerCase name~}}}": {
+          "avg:aws.ec2.cpuutilization{autoscaling_group:{{~toLowerCase name~}}}": {
             "alias": "{{title}}"
           }
         },
@@ -29,6 +29,18 @@
       }{{#unless @last}},{{/unless}}
       {{/each}}
     ],
-    "autoscale": true
+    "autoscale": true,
+    "markers": [
+      {
+        "dim": "y",
+        "type": "error dashed",
+        "val": 80,
+        "value": "y = 80",
+        "label": true
+      }
+    ],
+    "yaxis": {
+      "max": "100"
+    }
   }
 }

@@ -1,50 +1,61 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.lambda.invocations{{{querify queryObject}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.invocations{{{querify queryObject}}}.as_count()": {
-          "alias": "Invocations"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Invocations",
+  "width": 58,
+  "height": 19,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.lambda.invocations{{{querify query}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.lambda.invocations{{{querify query}}}.as_count()": {
+            "alias": "Invocations"
+          }
         }
       },
-      "conditional_formats": []
-    },
-    {
-      "q": "avg:aws.lambda.throttles{{{querify queryObject}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
+      {
+        "q": "avg:aws.lambda.errors{{{querify query}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "warm",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.lambda.errors{{{querify query}}}.as_count()": {
+            "alias": "Errors"
+          }
+        }
       },
-      "metadata": {
-        "avg:aws.lambda.throttles{{{querify queryObject}}}.as_count()": {
-          "alias": "Throttles"
+      {
+        "q": "avg:aws.lambda.throttles{{{querify query}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "warm",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.lambda.throttles{{{querify query}}}.as_count()": {
+            "alias": "Throttles"
+          }
         }
       }
-    },
-    {
-      "q": "avg:aws.lambda.errors{{{querify queryObject}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.errors{{{querify queryObject}}}.as_count()": {
-          "alias": "Errors"
-        }
-      }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {}
+    ],
+    "autoscale": true
+  },
+  "legend": true
 }

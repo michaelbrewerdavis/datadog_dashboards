@@ -1,28 +1,37 @@
 {
-  "requests": [
-    {
-      "q": "sum:aws.elb.httpcode_target_2xx{loadbalancer:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_4xx{loadbalancer:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_5xx{loadbalancer:{{~toLowerCase name~}}}.as_count()",
-      "type": "area",
-      "style": {
-        "palette": "warm",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "sum:aws.elb.httpcode_target_2xx{loadbalancer:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "2xx"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Requests",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "sum:aws.elb.httpcode_target_2xx{name:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_4xx{name:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_5xx{name:{{~toLowerCase name~}}}.as_count()",
+        "type": "area",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
         },
-        "sum:aws.elb.httpcode_target_4xx{loadbalancer:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "4xx"
-        },
-        "sum:aws.elb.httpcode_target_5xx{loadbalancer:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "5xx"
+        "aggregator": "avg",
+        "metadata": {
+          "sum:aws.elb.httpcode_target_2xx{name:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "2xx"
+          },
+          "sum:aws.elb.httpcode_target_4xx{name:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "4xx"
+          },
+          "sum:aws.elb.httpcode_target_5xx{name:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "5xx"
+          }
         }
-      },
-      "conditional_formats": []
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {}
+      }
+    ],
+    "autoscale": true
+  },
+  "legend": true
 }

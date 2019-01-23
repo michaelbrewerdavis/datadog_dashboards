@@ -1,80 +1,46 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.lambda.duration.p99.9{{{querify queryObject}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.duration.p99.9{{{querify queryObject}}}": {
-          "alias": "p99.9"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Runtime Duration",
+  "width": 58,
+  "height": 19,
+  "x": 59,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.lambda.duration{{{querify query}}}",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.lambda.duration{{{querify query}}}": {
+            "alias": "Average"
+          }
         }
       },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    },
-    {
-      "q": "avg:aws.lambda.duration.p95{{{querify queryObject}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.duration.p95{{{querify queryObject}}}": {
-          "alias": "p95"
-        }
-      }
-    },
-    {
-      "q": "avg:aws.lambda.duration.p80{{{querify queryObject}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.duration.p80{{{querify queryObject}}}": {
-          "alias": "p80"
+      {
+        "q": "max:aws.lambda.duration.maximum{{{querify query}}}",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "max",
+        "type": "line",
+        "metadata": {
+          "max:aws.lambda.duration.maximum{{{querify query}}}": {
+            "alias": "Maximum"
+          }
         }
       }
-    },
-    {
-      "q": "avg:aws.lambda.duration{{{querify queryObject}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.duration{{{querify queryObject}}}": {
-          "alias": "duration"
-        }
-      }
-    },
-    {
-      "q": "avg:aws.lambda.duration.maximum{{{querify queryObject}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.lambda.duration.maximum{{{querify queryObject}}}": {
-          "alias": "Max"
-        }
-      }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  },
+  "legend": true
 }

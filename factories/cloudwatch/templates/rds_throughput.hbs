@@ -1,28 +1,45 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.rds.network_receive_throughput{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Network Throughput",
+  "width": 29,
+  "height": 13,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "conditional_formats": [],
+        "q": "avg:aws.rds.network_receive_throughput{dbinstanceidentifier:{{~name~}}}.as_count()",
+        "type": "line",
+        "metadata": {
+          "avg:aws.rds.network_receive_throughput{dbinstanceidentifier:{{~name~}}}.as_count()": {
+            "alias": "RX"
+          }
+        }
       },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    },
-    {
-      "q": "avg:aws.rds.network_transmit_throughput{dbinstanceidentifier:{{~dbinstanceidentifier~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
+      {
+        "q": "avg:aws.rds.network_transmit_throughput{dbinstanceidentifier:{{~name~}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "type": "line",
+        "metadata": {
+          "avg:aws.rds.network_transmit_throughput{dbinstanceidentifier:{{~name~}}}.as_count()": {
+            "alias": "TX"
+          }
+        }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  }
 }

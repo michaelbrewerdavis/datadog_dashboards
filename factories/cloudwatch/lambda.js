@@ -6,27 +6,20 @@ class CloudwatchLambdaGraphFactory {
   }
 
   /**
-   * Creates a lambda duration timeseries graph
-   * @param {object} name
+   * Returns rendered JSON template from given params.
+   *
+   * @param {string} template Filename of the Handlebars template to use.
+   * @param {string} lambda Lambda configuration object.
+   * @param {string} state
    */
-  lambda_duration(name) {
-    const queryObject = { region: this.region, functionname: name };
-
-    return Templates.jsonFromTemplate("templates/lambda_duration.hbs", {
-      queryObject
-    });
-  }
-
-  /**
-   * Creates a lambda invocations timeseries graph
-   * @param {object} name
-   */
-  lambda_invocations(name) {
-    const queryObject = { region: this.region, functionname: name };
-
-    return Templates.jsonFromTemplate("templates/lambda_invocations.hbs", {
-      queryObject
-    });
+  render(template, lambda, state) {
+    return Templates.jsonFromTemplate(
+      `templates/lambda_${template}.hbs`,
+      {
+        query: { functionname: lambda.name, region: this.region },
+        position: state.position
+      }
+    );
   }
 }
 

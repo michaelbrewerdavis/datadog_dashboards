@@ -1,36 +1,45 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.elasticache.cache_hits{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.elasticache.cache_hits{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "Cache Hits"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Hits / Misses",
+  "width": 39,
+  "height": 13,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.elasticache.cache_hits{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.elasticache.cache_hits{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "Hits"
+          }
         }
       },
-      "conditional_formats": []
-    },
-    {
-      "q": "avg:aws.elasticache.cache_misses{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.elasticache.cache_misses{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "Cache Misses"
+      {
+        "q": "avg:aws.elasticache.cache_misses{cacheclusterid:{{~toLowerCase name~}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "type": "line",
+        "metadata": {
+          "avg:aws.elasticache.cache_misses{cacheclusterid:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "Misses"
+          }
         }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {}
+    ],
+    "autoscale": true
+  }
 }

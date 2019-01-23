@@ -1,38 +1,44 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.kinesis.get_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.kinesis.get_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "Get Sum"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Records",
+  "width": 41,
+  "height": 18,
+  "x": 38,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.kinesis.get_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "type": "line",
+        "metadata": {
+          "avg:aws.kinesis.get_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "Get Sum"
+          }
         }
       },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    },
-    {
-      "q": "avg:aws.kinesis.put_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.kinesis.put_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()": {
-          "alias": "Put Sum"
+      {
+        "q": "avg:aws.kinesis.put_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "type": "line",
+        "metadata": {
+          "avg:aws.kinesis.put_records_records.sum{streamname:{{~toLowerCase name~}}}.as_count()": {
+            "alias": "Put Sum"
+          }
         }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  },
+  "legend": true
 }

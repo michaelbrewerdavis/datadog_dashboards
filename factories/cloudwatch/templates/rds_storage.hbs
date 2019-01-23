@@ -1,19 +1,30 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.rds.free_storage_space{dbinstanceidentifier:{{~dbinstanceidentifier~}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Free Storage",
+  "width": 28,
+  "height": 13,
+  "x": 30,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.rds.free_storage_space{dbinstanceidentifier:{{~name~}}}",
+        "type": "area",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "avg",
+        "metadata": {
+          "avg:aws.rds.free_storage_space{dbinstanceidentifier:{{~name~}}}": {
+            "alias": "Free Storage"
+          }
+        }
+      }
+    ],
+    "autoscale": true
+  }
 }

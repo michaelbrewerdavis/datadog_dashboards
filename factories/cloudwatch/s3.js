@@ -2,11 +2,26 @@ const Templates = require("../../lib/templates");
 
 class CloudwatchS3GraphFactory {
   /**
-   * Creates an S3 Query value.
-   * @param {string} name
+   * Returns rendered JSON template from given params.
+   *
+   * @param {string} template Filename of the Handlebars template to use.
+   * @param {string} bucket S3 bucket configuration object.
+   * @param {string} state
    */
-  s3_bucketSize(name) {
-    return Templates.jsonFromTemplate("templates/s3_bucketSize.hbs", { name });
+  render(template, bucket, state) {
+    var position = state.position;
+
+    if (template === 'totalSize') {
+      position += 10;
+    }
+
+    return Templates.jsonFromTemplate(
+      `templates/s3_${template}.hbs`,
+      {
+        query: { bucketname: bucket.name },
+        position: position
+      }
+    );
   }
 }
 

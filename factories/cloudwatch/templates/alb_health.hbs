@@ -1,38 +1,44 @@
 {
-  "requests": [
-    {
-      "q": "max:aws.elb.healthy_host_count{loadbalancer:{{~toLowerCase name~}}}",
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "max:aws.elb.healthy_host_count{loadbalancer:{{~toLowerCase name~}}}": {
-          "alias": "Healthy"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Hosts",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "sum:aws.elb.healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}",
+        "type": "area",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "metadata": {
+          "sum:aws.elb.healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}": {
+            "alias": "Healthy"
+          }
         }
       },
-      "conditional_formats": [],
-      "aggregator": "sum"
-    },
-    {
-      "q": "max:aws.elb.un_healthy_host_count{loadbalancer:{{~toLowerCase name~}}}",
-      "type": "area",
-      "style": {
-        "palette": "warm",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "max:aws.elb.un_healthy_host_count{loadbalancer:{{~toLowerCase name~}}}": {
-          "alias": "Unhealthy"
+      {
+        "q": "sum:aws.elb.un_healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}",
+        "type": "area",
+        "style": {
+          "width": "normal",
+          "palette": "warm",
+          "type": "solid"
+        },
+        "metadata": {
+          "sum:aws.elb.un_healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}": {
+            "alias": "Unhealthy"
+          }
         }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  },
+  "legend": false
 }

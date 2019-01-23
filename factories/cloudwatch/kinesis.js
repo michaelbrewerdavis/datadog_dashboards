@@ -2,23 +2,20 @@ const Templates = require("../../lib/templates");
 
 class CloudwatchKinesisGraphFactory {
   /**
-   * Creates a Kinesis iterator age timeseries graph
-   * @param {string} name
+   * Returns rendered JSON template from given params.
+   *
+   * @param {string} template Filename of the Handlebars template to use.
+   * @param {string} lambda Lambda configuration object.
+   * @param {string} state
    */
-  kinesis_iteratorAge(name) {
-    return Templates.jsonFromTemplate("templates/kinesis_iteratorAge.hbs", {
-      name
-    });
-  }
-
-  /**
-   * Creates a Kinesis records timeseries graph
-   * @param {string} name
-   */
-  kinesis_records(name) {
-    return Templates.jsonFromTemplate("templates/kinesis_records.hbs", {
-      name
-    });
+  render(template, lambda, state) {
+    return Templates.jsonFromTemplate(
+      `templates/kinesis_${template}.hbs`,
+      {
+        name: lambda.name,
+        position: state.position
+      }
+    );
   }
 }
 

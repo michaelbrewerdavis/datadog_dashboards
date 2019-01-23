@@ -1,8 +1,8 @@
 {
   "type": "timeseries",
   "title": true,
-  "title_text": "Freeable Memory",
-  "width": 38,
+  "title_text": "Items",
+  "width": 39,
   "height": 13,
   "x": 40,
   "y": {{position}},
@@ -10,17 +10,17 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}",
-        "type": "area",
+        "q": "avg:aws.elasticache.curr_items{cacheclusterid:{{~toLowerCase name~}}}",
         "style": {
+          "width": "normal",
           "palette": "dog_classic",
-          "type": "solid",
-          "width": "normal"
+          "type": "solid"
         },
         "aggregator": "avg",
+        "type": "area",
         "metadata": {
-          "avg:avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}": {
-            "alias": "Freeable Memory"
+          "avg:aws.elasticache.curr_items{cacheclusterid:{{~toLowerCase name~}}}": {
+            "alias": "Items"
           }
         }
       }

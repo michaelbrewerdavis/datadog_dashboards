@@ -2,11 +2,16 @@
 
 exports.dashboardsByEnvironment = [{
   title: 'Dashboard Title (environment)',
-  project: 'project name',
-  environment_host: 'host environment',
+  project: 'Aws-project-tag',
+  environment: 'production', // same as you used for AWS "Environment" tags
   region: 'put AWS region here',
   rds_id: 'AWS rds id',
-  alb: 'app/app-name-A7ceNNeF5q/beefdadbeefdadda',
+  alb: [
+    {
+      name: 'app-name-A7ceNNeF5q',
+      targetgroup: 'app-name-05vqy6ltXY/a074fcc968a175d8'
+    },
+  ],
   asgs: {
     web: {
       title: 'Web Servers',
@@ -53,6 +58,7 @@ exports.dashboardsByEnvironment = [{
   },
   caches: {
     redis: {
+      type: 'redis',
       title: 'Redis Cache',
       name: 'aws name'
     }
@@ -64,7 +70,12 @@ exports.dashboardsByEnvironment = [{
     },
     another_queue: {
       title: 'another queue',
-      name: 'aws name'
+      name: 'aws name',
+      conditional_formats: [{ // Applied to "currently visible" metric
+        comparator: '>',
+        value: '0',
+        palette: 'red_on_white'
+      }]
     }
   }
 }, {
@@ -74,29 +85,99 @@ exports.dashboardsByEnvironment = [{
     prefix: "region",
     default: "region:*"
   }],
+  custom_title: 'My Custom Graphs',
+  custom_height: 20,
   custom: {
-    custom_graph_1: {
-      title: 'API Conroller 1 requests',
-      viz: 'timeseries',
-      queries: [{
-        type: 'bars',
-        qs: [
-          { q:'sum:request.controller1.show.total.count{$region}.as_count()', alias: 'controller1_show'},
-          { q:'sum:request.controller1.update.total.count{$region}.as_count()', alias: 'controller1_update'}
-        ]
-      }]
+    widget_1: {
+      type: 'timeseries',
+      title: true,
+      title_text: 'API Conroller 1 Requests',
+      width: 58,
+      height: 17,
+      x: 0,
+      y: 0,
+      tile_def: {
+        viz: 'timeseries',
+        requests: [
+          {
+            q: 'sum:request.controller1.show.total.count{$region}.as_count()',
+            style: {
+              width: 'normal',
+              palette: 'dog_classic',
+              type: 'solid'
+            },
+            aggregator: 'sum',
+            type: 'bars',
+            metadata: {
+              'sum:request.controller1.show.total.count{$region}.as_count()': {
+                alias: 'Controller 1 Show'
+              }
+            }
+          },
+          {
+            q: 'sum:request.controller1.update.total.count{$region}.as_count()',
+            style: {
+              width: 'normal',
+              palette: 'dog_classic',
+              type: 'solid'
+            },
+            aggregator: 'sum',
+            type: 'bars',
+            metadata: {
+              'sum:request.controller1.update.total.count{$region}.as_count()': {
+                alias: 'Controller 1 Update'
+              }
+            }
+          },
+        ],
+        autoscale: true
+      }
     },
-    custom_graph_1: {
-      title: 'API Conroller 2 requests',
-      viz: 'timeseries',
-      queries: [{
-        type: 'bars',
-        qs: [
-          { q:'sum:request.controller2.show.total.count{$region}.as_count()', alias: 'controller2_show'},
-          { q:'sum:request.controller2.update.total.count{$region}.as_count()', alias: 'controller2_update'}
-        ]
-      }]
-    }
+    widget_2: {
+      type: 'timeseries',
+      title: true,
+      title_text: 'API Conroller 2 Requests',
+      width: 58,
+      height: 17,
+      x: 59,
+      y: 0,
+      tile_def: {
+        viz: 'timeseries',
+        requests: [
+          {
+            q: 'sum:request.controller2.show.total.count{$region}.as_count()',
+            style: {
+              width: 'normal',
+              palette: 'dog_classic',
+              type: 'solid'
+            },
+            aggregator: 'sum',
+            type: 'bars',
+            metadata: {
+              'sum:request.controller2.show.total.count{$region}.as_count()': {
+                alias: 'Controller 2 Show'
+              }
+            }
+          },
+          {
+            q: 'sum:request.controller2.update.total.count{$region}.as_count()',
+            style: {
+              width: 'normal',
+              palette: 'dog_classic',
+              type: 'solid'
+            },
+            aggregator: 'sum',
+            type: 'bars',
+            metadata: {
+              'sum:request.controller2.update.total.count{$region}.as_count()': {
+                alias: 'Controller 2 Update'
+              }
+            }
+          },
+        ],
+        autoscale: true
+      }
+    },
   }
 }]
 

@@ -1,19 +1,21 @@
 {
-  "viz": "query_value",
-  "requests": [
-    {
-      "q": "sum:aws.elb.request_count{loadbalancer:{{~toLowerCase name~}}}.as_count()",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "conditional_formats": [],
-      "aggregator": "sum"
-    }
-  ],
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+  "type": "query_value",
+  "title": true,
+  "title_text": "{{code}}",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "query_value",
+    "requests": [
+      {
+        "q": "sum:aws.elb.httpcode_target_{{code}}{name:{{~toLowerCase name~}}}.as_count()",
+        "aggregator": "sum"
+      }
+    ],
+    "autoscale": true,
+    "precision": 2,
+    "custom_unit": "r"
+  }
 }

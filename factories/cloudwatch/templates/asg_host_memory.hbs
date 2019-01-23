@@ -1,0 +1,32 @@
+{
+  "type": "hostmap",
+  "title": true,
+  "title_text": "Memory Usage by Host",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "hostmap",
+    "nodeType": "host",
+    "style": {
+      "fillMax": null,
+      "palette": "green_to_orange",
+      "fillMin": null,
+      "paletteFlip": false
+    },
+    "group": ["role"],
+    "noMetricHosts": false,
+    "requests": [
+      {
+        "q": "avg:system.mem.used{{{querify query}}} by {host}",
+        "type": "fill"
+      },
+      {
+        "q": "avg:system.mem.total{{{querify query}}} by {host}",
+        "type": "size"
+      }
+    ],
+    "noGroupHosts": false
+  }
+}

@@ -1,19 +1,31 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.rds.burst_balance{dbinstanceidentifier:{{~dbinstanceidentifier~}}}",
-      "type": "line",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Burst Balance",
+  "width": 28,
+  "height": 13,
+  "x": 89,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "aggregator": "avg",
+        "conditional_formats": [],
+        "q": "avg:aws.rds.burst_balance{dbinstanceidentifier:{{~name~}}}",
+        "type": "area",
+        "metadata": {
+          "avg:aws.rds.burst_balance{dbinstanceidentifier:{{~name~}}}": {
+            "alias": "Burst Balance"
+          }
+        }
+      }
+    ],
+    "autoscale": true
+  }
 }

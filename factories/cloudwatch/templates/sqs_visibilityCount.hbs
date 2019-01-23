@@ -1,25 +1,24 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.sqs.approximate_number_of_messages_visible{{{querify queryObject}}}",
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "conditional_formats": [
-        {
-          "comparator": ">",
-          "value": "5",
-          "palette": "red_on_white"
-        }
-      ],
-      "aggregator": "last"
-    }
-  ],
-  "viz": "query_value",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+  "type": "query_value",
+  "title": true,
+  "title_text": "Currently Visible",
+  "width": 21,
+  "height": 7,
+  "x": 0,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "query_value",
+    "requests": [
+      {
+        "q": "avg:aws.sqs.approximate_number_of_messages_visible{{{querify query}}}",
+        {{#if queue.conditional_formats}}
+        "conditional_formats": {{JSONStringify queue.conditional_formats}},
+        {{/if}}
+        "aggregator": "last"
+      }
+    ],
+    "autoscale": true,
+    "precision": 2,
+    "custom_unit": "m"
+  }
 }

@@ -1,38 +1,45 @@
 {
-  "requests": [
-    {
-      "q": "avg:aws.sqs.approximate_number_of_messages_visible{{{querify queryObject}}}",
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.sqs.approximate_number_of_messages_visible{{{querify queryObject}}}": {
-          "alias": "Visible (Needs Processing)"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Visibility",
+  "width": 47,
+  "height": 17,
+  "x": 22,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.sqs.approximate_number_of_messages_visible{{{querify query}}}",
+        "type": "area",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "avg",
+        "metadata": {
+          "avg:aws.sqs.approximate_number_of_messages_visible{{{querify query}}}": {
+            "alias": "Visible"
+          }
         }
       },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    },
-    {
-      "q": "avg:aws.sqs.approximate_number_of_messages_not_visible{{{querify queryObject}}}",
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "metadata": {
-        "avg:aws.sqs.approximate_number_of_messages_not_visible{{{querify queryObject}}}": {
-          "alias": "Invisible (Processing)"
+      {
+        "q": "avg:aws.sqs.approximate_number_of_messages_not_visible{{{querify query}}}",
+        "type": "area",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "avg",
+        "metadata": {
+          "avg:aws.sqs.approximate_number_of_messages_not_visible{{{querify query}}}": {
+            "alias": "Not Visible"
+          }
         }
       }
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+    ],
+    "autoscale": true
+  }
 }

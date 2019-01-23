@@ -2,24 +2,24 @@
   "type": "timeseries",
   "title": true,
   "title_text": "Freeable Memory",
-  "width": 38,
+  "width": 37,
   "height": 13,
-  "x": 40,
+  "x": 80,
   "y": {{position}},
   "tile_def": {
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}",
-        "type": "area",
+        "q": "avg:aws.elasticache.freeable_memory{cacheclusterid:{{~toLowerCase name~}}}",
         "style": {
+          "width": "normal",
           "palette": "dog_classic",
-          "type": "solid",
-          "width": "normal"
+          "type": "solid"
         },
         "aggregator": "avg",
+        "type": "area",
         "metadata": {
-          "avg:avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}": {
+          "avg:aws.elasticache.freeable_memory{cacheclusterid:{{~toLowerCase name~}}}": {
             "alias": "Freeable Memory"
           }
         }

@@ -1,16 +1,16 @@
 {
   "type": "timeseries",
   "title": true,
-  "title_text": "Freeable Memory",
-  "width": 38,
-  "height": 13,
-  "x": 40,
+  "title_text": "Number of Objects",
+  "width": 47,
+  "height": 17,
+  "x": 22,
   "y": {{position}},
   "tile_def": {
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}",
+        "q": "avg:aws.s3.number_of_objects{{{querify query}}}",
         "type": "area",
         "style": {
           "palette": "dog_classic",
@@ -19,12 +19,18 @@
         },
         "aggregator": "avg",
         "metadata": {
-          "avg:avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}": {
-            "alias": "Freeable Memory"
+          "avg:aws.s3.number_of_objects{{{querify query}}}": {
+            "alias": "Object Count"
           }
         }
       }
     ],
-    "autoscale": true
+    "autoscale": true,
+    "yaxis": {
+      "includeZero": false
+    }
+  },
+  "time": {
+    "live_span": "1mo"
   }
 }

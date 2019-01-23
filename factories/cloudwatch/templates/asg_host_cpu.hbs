@@ -1,0 +1,28 @@
+{
+  "type": "hostmap",
+  "title": true,
+  "title_text": "CPU Usage by Host",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "hostmap",
+    "nodeType": "host",
+    "style": {
+      "fillMax": 100,
+      "palette": "green_to_orange",
+      "fillMin": 20,
+      "paletteFlip": true
+    },
+    "group": ["role"],
+    "noMetricHosts": false,
+    "requests": [
+      {
+        "q": "avg:system.cpu.idle{{{querify query}}} by {host}",
+        "type": "fill"
+      }
+    ],
+    "noGroupHosts": false
+  }
+}

@@ -6,22 +6,49 @@ class CloudwatchDynamoPanelFactory {
   }
 
   /**
-   * Creates a dynamo units panel
-   * @param {string} readWrite - Should be Read or Write
-   * @param {object} query
+   * Creates a dynamo read/write capacity units panel
+   *
+   * @param {object} table
+   * @param {object} state
    */
-  dynamodb_units(readWrite, query) {
-    const readWriteValue = readWrite.toLowerCase();
-    const queryObject = Object.assign(
-      query,
-      this.region && { region: this.region }
-    );
-    const context = Object.assign(
-      { queryObject },
-      { readWrite: readWriteValue }
-    );
+  units(table, state) {
+    var widgets = [];
+    var query = { tablename: table.name, region: this.region }
 
-    return Templates.jsonFromTemplate("templates/dynamodb_units.hbs", context);
+    widgets.push(Templates.jsonFromTemplate("templates/dynamodb_units.hbs", {
+      mode: 'Read',
+      query: query,
+      width: 39,
+      height: 13,
+      x: 0,
+      y: state.position
+    }));
+    widgets.push(Templates.jsonFromTemplate("templates/dynamodb_units.hbs", {
+      mode: 'Write',
+      query: query,
+      width: 39,
+      height: 13,
+      x: 40,
+      y: state.position
+    }));
+
+    return widgets;
+  }
+
+  /**
+   * Creates a dynamo read/write throttled panel
+   *
+   * @param {object} table
+   * @param {object} state
+   */
+  throttled(table, state) {
+    return Templates.jsonFromTemplate("templates/dynamodb_throttled.hbs", {
+      query: { tablename: table.name, region: this.region },
+      width: 37,
+      height: 13,
+      x: 80,
+      y: state.position
+    });
   }
 }
 

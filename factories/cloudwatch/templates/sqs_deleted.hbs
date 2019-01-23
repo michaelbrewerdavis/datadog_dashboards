@@ -1,19 +1,25 @@
 {
-  "requests": [
-    {
-      "q": "top(avg:aws.sqs.number_of_messages_deleted{{{querify queryObject}}}.as_count(), 10, 'mean', 'desc')",
-      "type": "area",
-      "style": {
-        "palette": "dog_classic",
-        "type": "solid",
-        "width": "normal"
-      },
-      "conditional_formats": [],
-      "aggregator": "avg"
-    }
-  ],
-  "viz": "timeseries",
-  "autoscale": true,
-  "xaxis": {},
-  "status": "done"
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Deleted",
+  "width": 47,
+  "height": 17,
+  "x": 70,
+  "y": {{position}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "avg:aws.sqs.number_of_messages_deleted{{{querify query}}}.as_count()",
+        "type": "area",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "avg"
+      }
+    ],
+    "autoscale": true
+  }
 }
