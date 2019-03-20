@@ -183,7 +183,7 @@ function generateAlbGraphs(load_balancers, widgets = [], state) {
   const factoryAlb = new CloudwatchAlbGraphFactory();
 
   for (var lb of load_balancers) {
-    widgets.push(titleWidget(`Load Balancer: ${lb.name}`, state));
+    widgets.push(titleWidget(`Load Balancer`, state));
 
     widgets.push(...factoryAlb.alb_totalRequests(lb, state));
     widgets.push(factoryAlb.alb_hits(lb, state));

@@ -8,7 +8,6 @@ exports.dashboardsByEnvironment = [{
   rds_id: 'AWS rds id',
   alb: [
     {
-      name: 'app-name-A7ceNNeF5q',
       targetgroup: 'app-name-05vqy6ltXY/a074fcc968a175d8'
     },
   ],

@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "sum:aws.elb.httpcode_target_2xx{name:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_4xx{name:{{~toLowerCase name~}}}.as_count(), sum:aws.elb.httpcode_target_5xx{name:{{~toLowerCase name~}}}.as_count()",
+        "q": "sum:aws.elb.httpcode_target_2xx{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}.as_count(), sum:aws.elb.httpcode_target_4xx{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}.as_count(), sum:aws.elb.httpcode_target_5xx{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}.as_count()",
         "type": "area",
         "style": {
           "palette": "dog_classic",
@@ -19,13 +19,13 @@
         },
         "aggregator": "avg",
         "metadata": {
-          "sum:aws.elb.httpcode_target_2xx{name:{{~toLowerCase name~}}}.as_count()": {
+          "sum:aws.elb.httpcode_target_2xx{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}.as_count()": {
             "alias": "2xx"
           },
-          "sum:aws.elb.httpcode_target_4xx{name:{{~toLowerCase name~}}}.as_count()": {
+          "sum:aws.elb.httpcode_target_4xx{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}.as_count()": {
             "alias": "4xx"
           },
-          "sum:aws.elb.httpcode_target_5xx{name:{{~toLowerCase name~}}}.as_count()": {
+          "sum:aws.elb.httpcode_target_5xx{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}.as_count()": {
             "alias": "5xx"
           }
         }

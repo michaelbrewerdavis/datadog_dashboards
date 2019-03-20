@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.elb.target_response_time.average{name:{{~toLowerCase name~}}}",
+        "q": "avg:aws.elb.target_response_time.average{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}",
         "type": "line",
         "style": {
           "width": "normal",
@@ -18,7 +18,7 @@
           "type": "solid"
         },
         "metadata": {
-          "avg:aws.elb.target_response_time.average{name:{{~toLowerCase name~}}}": {
+          "avg:aws.elb.target_response_time.average{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}": {
             "alias": "Response time (avg)"
           }
         }
