@@ -1,6 +1,6 @@
 {
   "name": "datadog_dashboards",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A quick way to generate helpful, pre-canned datadog dashboards for Cloudwatch.",
   "main": "index.js",
   "dependencies": {
