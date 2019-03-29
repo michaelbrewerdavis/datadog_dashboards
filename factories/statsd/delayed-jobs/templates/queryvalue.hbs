@@ -1,0 +1,45 @@
+{
+  "type": "query_value",
+  "title": true,
+  "title_align": "left",
+  "title_size": 16,
+  "title_text": "{{title}}",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "autoscale": true,
+    "requests": [
+    {
+      "aggregator": "sum",
+      "conditional_formats": [
+      {
+        "comparator": ">",
+        "palette": "white_on_red",
+        "value": null
+      },
+      {
+        "comparator": ">=",
+        "palette": "white_on_yellow",
+        "value": null
+      },
+      {
+        "comparator": "<",
+        "palette": "white_on_green",
+        "value": null
+      }
+      ],
+      "q": "{{~ query ~}}",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "type": null
+    }
+    ],
+    "viz": "query_value"
+  },
+  "legend": false
+}

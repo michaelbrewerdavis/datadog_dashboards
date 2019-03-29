@@ -1,0 +1,25 @@
+{
+  "type": "toplist",
+  "title": true,
+  "title_text": "{{ title }}",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "toplist",
+    "requests": [
+      {
+        "q": "top(sum:{{ metricPrefix }}.{{ metric }}{ {{~ scope ~}} } by {controller,action}.as_count(), 25, 'sum', 'desc')",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "type": null,
+        "conditional_formats": []
+      }
+    ]
+  },
+  "legend": false
+}

@@ -1,0 +1,40 @@
+{
+  "type": "timeseries",
+  "title": true,
+  "title_align": "left",
+  "title_size": 16,
+  "title_text": "{{title}}",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "autoscale": true,
+    "requests": [
+    {
+      "aggregator": "avg",
+      "conditional_formats": [],
+      "metadata": {
+        "max:{{ metricPrefix }}.perform.95percentile{ {{~ scope ~}} }": {
+          "alias": "95%ile"
+        },
+        "max:{{ metricPrefix }}.perform.avg{ {{~ scope ~}} }": {
+          "alias": "average"
+        },
+        "max:{{ metricPrefix }}.perform.median{ {{~ scope ~}} }": {
+          "alias": "median"
+        }
+      },
+      "q": "max:{{ metricPrefix }}.perform.median{ {{~ scope ~}} }, max:{{ metricPrefix }}.perform.avg{ {{~ scope ~}} }, max:{{ metricPrefix }}.perform.95percentile{ {{~ scope ~}} }",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "type": "line"
+    }
+    ],
+    "viz": "timeseries"
+  },
+  "legend": true
+}

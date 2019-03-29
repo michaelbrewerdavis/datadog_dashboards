@@ -1,0 +1,27 @@
+{
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Requests by Total Time (5m Moving Avg)",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "top(ewma_5(avg:{{metricPrefix}}.total.95percentile{ {{~ scope ~}} } by {action,controller}), 10, 'mean', 'desc')",
+        "type": "line",
+        "style": {
+          "palette": "dog_classic",
+          "type": "solid",
+          "width": "normal"
+        },
+        "aggregator": "avg",
+        "conditional_formats": []
+      }
+    ],
+    "autoscale": true
+  },
+  "legend": true
+}

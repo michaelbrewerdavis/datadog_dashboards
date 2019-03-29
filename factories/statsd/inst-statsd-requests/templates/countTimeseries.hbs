@@ -1,0 +1,27 @@
+{
+  "type": "timeseries",
+  "title": true,
+  "title_text": "Requests by Count (5m Moving Avg)",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "viz": "timeseries",
+    "requests": [
+      {
+        "q": "ewma_5(avg:{{ metricPrefix }}.total.count{ {{~ scope ~}} } by {action,controller}.as_count())",
+        "aggregator": "avg",
+        "style": {
+          "width": "normal",
+          "palette": "dog_classic",
+          "type": "solid"
+        },
+        "type": "area",
+        "conditional_formats": []
+      }
+    ],
+    "autoscale": true
+  },
+  "legend": true
+}

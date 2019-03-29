@@ -22,6 +22,20 @@ exports.dashboardsByEnvironment = [{
       name: 'worker-name'
     },
   },
+  inst_statsd_requests: {
+    // Optional: prefix to the metric name
+    // Default: 'request'.
+    metric_prefix: 'my.custom.namespace.request',
+    // Optional: You may wish to exclude some requests like health checks.
+    excluded_tags: [
+      'controller:health_check/health_check',
+    ],
+  },
+  delayed_jobs: {
+    // Optional: prefix to the metric name
+    // Default: 'delayedjob'.
+    metric_prefix: 'my.custom.namespace.delayedjob'
+  },
   kinesis_streams: {
     stream1: {
      title: 'Kinesis: Stream 1',

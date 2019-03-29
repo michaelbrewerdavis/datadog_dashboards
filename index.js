@@ -14,6 +14,8 @@ CloudwatchLambdaGraphFactory = require("./factories/cloudwatch/lambda");
 CloudwatchRdsGraphFactory = require("./factories/cloudwatch/rds");
 CloudwatchSqsGraphFactory = require("./factories/cloudwatch/sqs");
 CloudwatchS3GraphFactory = require("./factories/cloudwatch/s3");
+InstStatsdRequestsGraphFactory = require("./factories/statsd/inst-statsd-requests");
+DelayedJobsGraphFactory = require("./factories/statsd/delayed-jobs");
 CustomGraphFactory = require("./factories/custom");
 
 const chalk = require("chalk");
@@ -30,7 +32,7 @@ const program = require("commander");
 program
   .version(version)
   .usage("[options] <file ...>")
-  .option("-d, --dashboards [value]", "The dasboards config file")
+  .option("-d, --dashboards [value]", "The dashboards config file")
   .option("-p, --preview", "Preview the JSON, don't create the dashboard")
   .parse(process.argv);
 
@@ -217,6 +219,37 @@ function generateAsgGraphs(vars, widgets = [], state) {
   state.position += 38;
 }
 
+function generateInstStatsdRequestsGraphs(requests, project, environment, region, widgets = [], state) {
+  if (!requests) return;
+
+  const factoryRequests = new InstStatsdRequestsGraphFactory(requests, project, environment, region);
+
+  widgets.push(titleWidget('Requests', state));
+
+  widgets.push(factoryRequests.totalTimeGraph(state));
+  widgets.push(factoryRequests.countGraph(state));
+
+  state.position += 30;
+
+  widgets.push(...factoryRequests.toplists(state));
+
+  state.position += 16;
+}
+
+function generateDelayedJobsGraphs(delayed_jobs, project, environment, region, widgets = [], state) {
+  if (!delayed_jobs) return;
+
+  const factoryJobs = new DelayedJobsGraphFactory(delayed_jobs, project, environment, region);
+
+  widgets.push(titleWidget('Jobs', state));
+
+  widgets.push(...factoryJobs.executedFailedCounts(state, 0));
+  widgets.push(...factoryJobs.executedFailedTimeseries(state, 21));
+  widgets.push(...factoryJobs.runtimeAndOldestJob(state, 66));
+
+  state.position += 48;
+}
+
 function generateLambdasGraphs(lambdas, region, widgets = [], state) {
   if (!lambdas) return;
 
@@ -376,6 +409,21 @@ function generateEnvironmentDashboard(vars) {
   // ASGS
   if (vars.asgs) {
     generateAsgGraphs(vars, dashboard.widgets, state);
+  }
+
+  // Requests
+  if (vars.inst_statsd_requests) {
+    // Use the specific project for statsd or use the default one
+    var projectStatsd = vars.inst_statsd_requests.project || vars.project
+
+    generateInstStatsdRequestsGraphs(vars.inst_statsd_requests, projectStatsd, vars.environment,
+      vars.region, dashboard.widgets, state);
+  }
+
+  // Jobs
+  if (vars.delayed_jobs) {
+    generateDelayedJobsGraphs(vars.delayed_jobs, vars.project, vars.environment,
+      vars.region, dashboard.widgets, state);
   }
 
   // RDS

@@ -1,0 +1,29 @@
+{
+  "type": "timeseries",
+  "title": true,
+  "title_align": "left",
+  "title_size": 16,
+  "title_text": "{{title}}",
+  "width": {{width}},
+  "height": {{height}},
+  "x": {{x}},
+  "y": {{y}},
+  "tile_def": {
+    "autoscale": true,
+    "requests": [
+    {
+      "aggregator": "avg",
+      "conditional_formats": [],
+      "q": "{{~ query ~}}",
+      "style": {
+        "palette": "dog_classic",
+        "type": "solid",
+        "width": "normal"
+      },
+      "type": "{{ type }}"
+    }
+    ],
+    "viz": "timeseries"
+  },
+  "legend": false
+}
