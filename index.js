@@ -422,7 +422,10 @@ function generateEnvironmentDashboard(vars) {
 
   // Jobs
   if (vars.delayed_jobs) {
-    generateDelayedJobsGraphs(vars.delayed_jobs, vars.project, vars.environment,
+    // Use the specific project for statsd or use the default one
+    var projectStatsd = vars.delayed_jobs.project || vars.project
+
+    generateDelayedJobsGraphs(vars.delayed_jobs, projectStatsd, vars.environment,
       vars.region, dashboard.widgets, state);
   }
 
