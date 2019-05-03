@@ -5,7 +5,12 @@ exports.dashboardsByEnvironment = [{
   project: 'Aws-project-tag',
   environment: 'production', // same as you used for AWS "Environment" tags
   region: 'put AWS region here',
-  rds_id: 'AWS rds id',
+  rds_ids: [
+    {
+      id: 'RDS instance id here',
+      name: 'Primary' //optional
+    },
+  ],
   alb: [
     {
       targetgroup_name: 'app-name-05vqy6ltXY', // optional

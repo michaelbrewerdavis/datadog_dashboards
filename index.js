@@ -339,25 +339,35 @@ function generateSqsGraphs(queues, region, widgets = [], state) {
   });
 }
 
-function generateRdsGraphs(rdsId, widgets = [], state) {
-  if (!rdsId) return;
+function generateRdsGraphs(rdsIds, widgets = [], state) {
+  if (!rdsIds) return;
 
   const rds = new CloudwatchRdsGraphFactory();
 
-  widgets.push(titleWidget(`RDS: ${rdsId}`, state));
+  rdsIds.forEach(function(rdsInstance) {
+    let rdsId;
+    let rdsName = null;
+    if (typeof rdsInstance === 'string' || rdsInstance instanceof String) {
+      rdsId = rdsInstance;
+    } else {
+      rdsId = rdsInstance.id;
+      rdsName = rdsInstance.name;
+    }
+    widgets.push(titleWidget(`RDS: ${rdsName ? `${rdsName} (${rdsId})` : rdsId}`, state));
 
-  widgets.push(rds.render('rds_cpu', rdsId, state));
-  widgets.push(rds.render('rds_memory', rdsId, state));
-  widgets.push(rds.render('rds_connections', rdsId, state));
+    widgets.push(rds.render('rds_cpu', rdsId, state));
+    widgets.push(rds.render('rds_memory', rdsId, state));
+    widgets.push(rds.render('rds_connections', rdsId, state));
 
-  state.position += 16;
+    state.position += 16;
 
-  widgets.push(rds.render('rds_throughput', rdsId, state));
-  widgets.push(rds.render('rds_storage', rdsId, state));
-  widgets.push(rds.render('rds_iops', rdsId, state));
-  widgets.push(rds.render('rds_burstBalance', rdsId, state));
+    widgets.push(rds.render('rds_throughput', rdsId, state));
+    widgets.push(rds.render('rds_storage', rdsId, state));
+    widgets.push(rds.render('rds_iops', rdsId, state));
+    widgets.push(rds.render('rds_burstBalance', rdsId, state));
 
-  state.position += 16;
+    state.position += 16;
+  })
 }
 
 function generateS3BucketGraphs(buckets, widgets = [], state) {
@@ -430,8 +440,13 @@ function generateEnvironmentDashboard(vars) {
   }
 
   // RDS
+  // Support multiple RDS instances in an backwards compatible fashion
   if (vars.rds_id) {
-    generateRdsGraphs(vars.rds_id, dashboard.widgets, state);
+    generateRdsGraphs([vars.rds_id], dashboard.widgets, state);
+  }
+
+  if (vars.rds_ids) {
+    generateRdsGraphs(vars.rds_ids, dashboard.widgets, state);
   }
 
   // Caches
