@@ -71,9 +71,11 @@ exports.dashboardsByEnvironment = [{
       name: 'aws name'
     },
   },
-  s3: {
-    title: 's3',
-    name: 's3-name'
+  s3_buckets: {
+    uploads: {
+      title: 's3',
+      name: 's3-name'
+    }
   },
   caches: {
     redis: {
