@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "sum:aws.elb.healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}",
+        "q": "sum:aws.elb.healthy_host_count{ {{~toLowerCase name~}} }",
         "type": "area",
         "style": {
           "width": "normal",
@@ -18,13 +18,13 @@
           "type": "solid"
         },
         "metadata": {
-          "sum:aws.elb.healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}": {
+          "sum:aws.elb.healthy_host_count{ {{~toLowerCase name~}} }": {
             "alias": "Healthy"
           }
         }
       },
       {
-        "q": "sum:aws.elb.un_healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}",
+        "q": "sum:aws.elb.un_healthy_host_count{ {{~toLowerCase name~}} }",
         "type": "area",
         "style": {
           "width": "normal",
@@ -32,7 +32,7 @@
           "type": "solid"
         },
         "metadata": {
-          "sum:aws.elb.un_healthy_host_count{targetgroup:targetgroup/{{~toLowerCase targetgroup~}}}": {
+          "sum:aws.elb.un_healthy_host_count{ {{~toLowerCase name~}} }": {
             "alias": "Unhealthy"
           }
         }

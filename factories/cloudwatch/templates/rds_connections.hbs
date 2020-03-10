@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.database_connections{dbinstanceidentifier:{{~name~}}}",
+        "q": "avg:aws.rds.database_connections{ {{~name~}} }",
         "type": "line",
         "style": {
           "palette": "dog_classic",
@@ -19,7 +19,7 @@
         },
         "aggregator": "avg",
         "metadata": {
-          "avg:avg:aws.rds.database_connections{dbinstanceidentifier:{{~name~}}}": {
+          "avg:avg:aws.rds.database_connections{ {{~name~}} }": {
             "alias": "Connections"
           }
         }

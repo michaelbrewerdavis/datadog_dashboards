@@ -17,16 +17,16 @@
         },
         "aggregator": "avg",
         "conditional_formats": [],
-        "q": "avg:aws.rds.read_iops{dbinstanceidentifier:{{~name~}}}.as_rate()",
+        "q": "avg:aws.rds.read_iops{ {{~name~}} }.as_rate()",
         "type": "line",
         "metadata": {
-          "avg:aws.rds.read_iops{dbinstanceidentifier:{{~name~}}}.as_rate()": {
+          "avg:aws.rds.read_iops{ {{~name~}} }.as_rate()": {
             "alias": "Read"
           }
         }
       },
       {
-        "q": "avg:aws.rds.write_iops{dbinstanceidentifier:{{~name~}}}.as_rate()",
+        "q": "avg:aws.rds.write_iops{ {{~name~}} }.as_rate()",
         "style": {
           "width": "normal",
           "palette": "dog_classic",
@@ -34,7 +34,7 @@
         },
         "type": "line",
         "metadata": {
-          "avg:aws.rds.write_iops{dbinstanceidentifier:{{~name~}}}.as_rate()": {
+          "avg:aws.rds.write_iops{ {{~name~}} }.as_rate()": {
             "alias": "Write"
           }
         }

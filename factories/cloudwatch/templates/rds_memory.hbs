@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}",
+        "q": "avg:aws.rds.freeable_memory{ {{~name~}} }",
         "type": "area",
         "style": {
           "palette": "dog_classic",
@@ -19,7 +19,7 @@
         },
         "aggregator": "avg",
         "metadata": {
-          "avg:avg:aws.rds.freeable_memory{dbinstanceidentifier:{{~name~}}}": {
+          "avg:avg:aws.rds.freeable_memory{ {{~name~}} }": {
             "alias": "Freeable Memory"
           }
         }

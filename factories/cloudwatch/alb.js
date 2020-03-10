@@ -8,7 +8,7 @@ class CloudwatchAlbGraphFactory {
    */
   alb_hits(alb, state) {
     return Templates.jsonFromTemplate("templates/alb_hits.hbs", {
-      targetgroup: alb.targetgroup,
+      name: utils.tagName(alb.targetgroup, 'targetgroup:targetgroup/'),
       width: 52,
       height: 27,
       x: 21,
@@ -29,7 +29,7 @@ class CloudwatchAlbGraphFactory {
     for (const code of codes) {
       widgets.push(Templates.jsonFromTemplate("templates/alb_totalRequests.hbs", {
         code: code,
-        targetgroup: alb.targetgroup,
+        name: utils.tagName(alb.targetgroup, 'targetgroup:targetgroup/'),
         width: 20,
         height: 7,
         x: 0,
@@ -48,7 +48,7 @@ class CloudwatchAlbGraphFactory {
    */
   alb_latency(alb, state) {
     return Templates.jsonFromTemplate("templates/alb_latency.hbs", {
-      targetgroup: alb.targetgroup,
+      name: utils.tagName(alb.targetgroup, 'targetgroup:targetgroup/'),
       width: 43,
       height: 12,
       x: 74,
@@ -63,7 +63,7 @@ class CloudwatchAlbGraphFactory {
    */
   alb_health(alb, state) {
     return Templates.jsonFromTemplate("templates/alb_health.hbs", {
-      targetgroup: alb.targetgroup,
+      name: utils.tagName(alb.targetgroup, 'targetgroup:targetgroup/'),
       width: 43,
       height: 12,
       x: 74,

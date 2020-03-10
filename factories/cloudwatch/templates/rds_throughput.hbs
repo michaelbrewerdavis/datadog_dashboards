@@ -17,16 +17,16 @@
         },
         "aggregator": "avg",
         "conditional_formats": [],
-        "q": "avg:aws.rds.network_receive_throughput{dbinstanceidentifier:{{~name~}}}.as_count()",
+        "q": "avg:aws.rds.network_receive_throughput{ {{~name~}} }.as_count()",
         "type": "line",
         "metadata": {
-          "avg:aws.rds.network_receive_throughput{dbinstanceidentifier:{{~name~}}}.as_count()": {
+          "avg:aws.rds.network_receive_throughput{ {{~name~}} }.as_count()": {
             "alias": "RX"
           }
         }
       },
       {
-        "q": "avg:aws.rds.network_transmit_throughput{dbinstanceidentifier:{{~name~}}}.as_count()",
+        "q": "avg:aws.rds.network_transmit_throughput{ {{~name~}} }.as_count()",
         "style": {
           "width": "normal",
           "palette": "dog_classic",
@@ -34,7 +34,7 @@
         },
         "type": "line",
         "metadata": {
-          "avg:aws.rds.network_transmit_throughput{dbinstanceidentifier:{{~name~}}}.as_count()": {
+          "avg:aws.rds.network_transmit_throughput{ {{~name~}} }.as_count()": {
             "alias": "TX"
           }
         }

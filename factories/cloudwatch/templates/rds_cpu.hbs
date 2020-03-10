@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.cpuutilization{dbinstanceidentifier:{{~name~}}}",
+        "q": "avg:aws.rds.cpuutilization{ {{~name~}} }",
         "type": "area",
         "style": {
           "palette": "dog_classic",
@@ -19,7 +19,7 @@
         },
         "aggregator": "avg",
         "metadata": {
-          "avg:aws.rds.cpuutilization{dbinstanceidentifier:{{~name~}}}": {
+          "avg:aws.rds.cpuutilization{ {{~name~}} }": {
             "alias": "CPU Usage"
           }
         }

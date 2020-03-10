@@ -10,7 +10,7 @@
     "viz": "timeseries",
     "requests": [
       {
-        "q": "avg:aws.rds.free_storage_space{dbinstanceidentifier:{{~name~}}}",
+        "q": "avg:aws.rds.free_storage_space{ {{~name~}} }",
         "type": "area",
         "style": {
           "palette": "dog_classic",
@@ -19,7 +19,7 @@
         },
         "aggregator": "avg",
         "metadata": {
-          "avg:aws.rds.free_storage_space{dbinstanceidentifier:{{~name~}}}": {
+          "avg:aws.rds.free_storage_space{ {{~name~}} }": {
             "alias": "Free Storage"
           }
         }

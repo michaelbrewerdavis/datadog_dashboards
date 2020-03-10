@@ -17,10 +17,10 @@
         },
         "aggregator": "avg",
         "conditional_formats": [],
-        "q": "avg:aws.rds.burst_balance{dbinstanceidentifier:{{~name~}}}",
+        "q": "avg:aws.rds.burst_balance{ {{~name~}} }",
         "type": "area",
         "metadata": {
-          "avg:aws.rds.burst_balance{dbinstanceidentifier:{{~name~}}}": {
+          "avg:aws.rds.burst_balance{ {{~name~}} }": {
             "alias": "Burst Balance"
           }
         }

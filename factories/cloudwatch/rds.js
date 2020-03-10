@@ -1,4 +1,5 @@
 const Templates = require("../../lib/templates");
+const utils = require('../lib/utils')
 
 class CloudwatchRdsGraphFactory {
   /**
@@ -10,7 +11,7 @@ class CloudwatchRdsGraphFactory {
    */
   render(template, name, state) {
     return Templates.jsonFromTemplate(`templates/${template}.hbs`, {
-      name: name,
+      name: utils.tagName(name, 'dbinstanceidentifier:'),
       position: state.position
     });
   }
